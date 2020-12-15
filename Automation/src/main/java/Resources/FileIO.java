@@ -14,10 +14,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class FileIO {
 	// variables declaration
 		FileInputStream fis = null;
-		FileOutputStream fos = null;
-		XSSFWorkbook workbook = null;
-		XSSFSheet sheet = null;
-		XSSFRow row = null;
+		static FileOutputStream fos = null;
+		static XSSFWorkbook workbook = null;
+		static XSSFSheet sheet = null;
+		static XSSFRow row = null;
 		Properties prop = null;
 
 		// Setting properties file for input
