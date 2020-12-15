@@ -6,8 +6,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 
-import Drivers.BaseUI;
-import PageObject.UrbanLadder;
+import Resources.BaseUI;
+import PageObject.UrbaanLader;
 
 public class TestCases {
   public static WebDriver driver;
@@ -15,13 +15,13 @@ public class TestCases {
 	@BeforeSuite
 	public void setup() {
 
-		driver = Base.getDriver();
+		driver = BaseUI.getDriver();
 		
 	}
   @Test(priority = 0)
 	public void popup() {
 		 
-		 UrbanLadder implement = new UrbanLadder(driver);
+		 UrbaanLader implement = new UrbaanLader(driver);
 		 
 		 implement.popuping();
 		
@@ -29,7 +29,7 @@ public class TestCases {
 	}
    @Test(priority = 1)
 	public void search() {
-		 UrbanLadder implement = new UrbanLadder(driver);
+		 UrbaanLader implement = new UrbaanLader(driver);
 		 implement.search();
 		 
 		 
@@ -39,20 +39,20 @@ public class TestCases {
 	@Test(priority = 2)
 	public void selectPrice() {
 		
-		 UrbanLadder implement = new UrbanLadder(driver);
+		 UrbaanLader implement = new UrbaanLader(driver);
 		 implement.selectPrice();
-		 Test6.pass("Passed");
+		 
 
 	}
 	@Test(priority = 3)
 	public void print0(){
-		UrbanLadder implement = new UrbanLadder(driver);
+		UrbaanLader implement = new UrbaanLader(driver);
 		implement.print0();
 	}
   @AfterSuite
 	public void closeBrowser() 
 	{
-	    extent.flush();
+	  
 
 		driver.quit();
 	}
