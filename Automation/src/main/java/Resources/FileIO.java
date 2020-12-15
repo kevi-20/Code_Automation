@@ -23,7 +23,7 @@ public class FileIO {
 		// Setting properties file for input
 		public Properties inputSetup() {
 
-			File file = new File("resource\\config.properties");
+			File file = new File("C:\\Users\\Ks4u\\git\\Code_Automation1\\Automation\\Resources\\Config.properties");
 
 			try {
 				fis = new FileInputStream(file);
