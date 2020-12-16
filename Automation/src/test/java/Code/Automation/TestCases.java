@@ -49,6 +49,33 @@ public class TestCases {
 		UrbaanLader implement = new UrbaanLader(driver);
 		implement.print0();
 	}
+	@Test(priority = 4)
+	public void storage() throws InterruptedException {
+		
+		 UrbaanLader implement = new UrbaanLader(driver);
+		 implement.Storage();
+		 
+
+	}
+	@Test(priority = 5)
+	public void print1(){
+		UrbaanLader implement = new UrbaanLader(driver);
+		implement.print1();
+	}
+	@Test(priority = 6)
+	public void Stock() throws InterruptedException {
+		
+		 UrbaanLader implement = new UrbaanLader(driver);
+		 implement.Stock();
+		 
+
+	}
+	
+	@Test(priority = 7)
+	public void print2(){
+		UrbaanLader implement = new UrbaanLader(driver);
+		implement.print2();
+	}
   @AfterSuite
 	public void closeBrowser() 
 	{

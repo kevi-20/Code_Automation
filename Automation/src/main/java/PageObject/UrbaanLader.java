@@ -79,7 +79,8 @@ public class UrbaanLader {
      // log.info("Selecting the price range");
        
 	}
-	public void print0(){
+
+public void print0(){
 		 try {
 
 				Thread.sleep(1000);
@@ -103,9 +104,88 @@ public class UrbaanLader {
 			System.out.println(shprices.get(i).getText());
 		FileIO.output0(name,price,size);	
    }
+		
   
 }
+public void print1(){
+	 try {
 
+			Thread.sleep(1000);
+
+			} catch (Exception e) {
+
+	
+
+			e.printStackTrace();
+
+			}
+	List<WebElement> shtitles = driver.findElements(shelvesTitle);
+	List<WebElement> shprices = driver.findElements(shelvesPrice);
+	int size=shtitles.size();
+	String[] name = new String[size];
+	String[] price = new String[size];
+	for (int i = 0; i <size; i++) {
+		name[i] = shtitles.get(i).getText();
+		price[i] = shprices.get(i).getText();
+		System.out.print(shtitles.get(i).getText() + "  ");
+		System.out.println(shprices.get(i).getText());
+	FileIO.output1(name,price,size);	
+}
+	
+
+}
+public void print2(){
+	 try {
+
+			Thread.sleep(1000);
+
+			} catch (Exception e) {
+
+	
+
+			e.printStackTrace();
+
+			}
+	List<WebElement> shtitles = driver.findElements(shelvesTitle);
+	List<WebElement> shprices = driver.findElements(shelvesPrice);
+	int size=shtitles.size();
+	String[] name = new String[size];
+	String[] price = new String[size];
+	for (int i = 0; i <size; i++) {
+		name[i] = shtitles.get(i).getText();
+		price[i] = shprices.get(i).getText();
+		System.out.print(shtitles.get(i).getText() + "  ");
+		System.out.println(shprices.get(i).getText());
+	FileIO.output2(name,price,size);	
+}
+	
+
+}
+
+
+
+	public void Storage() throws InterruptedException {
+		driver.findElement(storage).click();
+		Thread.sleep(1000);
+		WebElement check = driver.findElement(By.xpath(
+		"/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div/form/div[1]/div/div/ul/li[3]/div[2]/div/div/div/ul/li[1]/input"));
+		check.click();
+	}
+
+
+
+	public void Stock() throws InterruptedException {
+		 Thread.sleep(1000);
+			driver.findElement(stock).click();
+		
+	}
+
+
+
+	
+
+
+	
 
 
 	
