@@ -1,10 +1,23 @@
 package Code.Automation;
 
-public class TestCases {
-  	public WebDriver driver;
+import java.io.IOException;
 
-	Implementation i = new Implementation(driver);
+
+import java.util.Scanner;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import PageObject.UrbaanLader;
+import Resources.BaseUI;
+
+public class TestCases {
+	public WebDriver driver;
+
+	UrbaanLader i = new UrbaanLader(driver);
 	
+
 	@BeforeTest
 	public void InvokeBrowser() {
 
@@ -18,19 +31,18 @@ public class TestCases {
 		i.createDriver(ch);
 
 	}
-	
 	@Test(priority = 1)
 	public void Invalid() throws IOException {
 		//ExtentTest logger = report.createTest("Checking if the website is accepting invalid characters");
 		//logger.log(Status.INFO, "Checking if the website is accepting invalid characters");
 		//log.info("Checking if the website is accepting invalid characters");
 		i.popuping();
-		i.navigate1();
+	
 		
 	}
 	
 	@Test(priority = 2)
-	public void enter() throws IOException {
+	public void enter() throws IOException, InterruptedException {
 		i.search();
 	}
 	
@@ -40,12 +52,12 @@ public class TestCases {
 	}
 	
 	@Test(priority = 4)
-	public void Storage() throws IOException {
+	public void storage() throws IOException, InterruptedException {
 		i.storage();
 	}
 	
 	@Test(priority = 5)
-	public void Stock() throws IOException {
+	public void stock() throws IOException {
 		i.stock();
 	}
 	
@@ -54,4 +66,8 @@ public class TestCases {
 		i.print();
 	}
 
+	@Test(priority = 7)
+	public void close() throws IOException {
+		i.close();
+	}
 }
