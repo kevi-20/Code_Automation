@@ -57,10 +57,11 @@ public class FileIO {
 			String location = prop.getProperty("firefox");
 			return location;
 		}
-		public static  void output1(String[]name ,String[]price) {
+		/**********************************Printing the output in excel**********************************/
+		public static  void output1(String[]name ,String[]price,int size) {
 			workbook = new XSSFWorkbook();
-			sheet = workbook.createSheet("output1");
-			for (int i = 0; i < 6; i++) {
+			sheet = workbook.createSheet("output1.xlsx");
+			for (int i = 0; i < size; i++) {
 				row = sheet.createRow(i);
 				row.createCell(0).setCellValue(name[i]);
 				row.createCell(1).setCellValue(price[i]);
