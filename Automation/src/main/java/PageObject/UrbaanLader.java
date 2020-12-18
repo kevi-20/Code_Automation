@@ -97,32 +97,33 @@ public class UrbaanLader {
 		// log.info("Selecting Stock type");
 	}
 
-	public void print() {
-		try {
+	public void print(){
+		 try {
 
-			Thread.sleep(1000);
+				Thread.sleep(1000);
 
-		} catch (Exception e) {
+				} catch (Exception e) {
 
-			e.printStackTrace();
+		
 
-		}
+				e.printStackTrace();
+
+				}
 		List<WebElement> shtitles = driver.findElements(shelvesTitle);
 		List<WebElement> shprices = driver.findElements(shelvesPrice);
-
-		String[] name = new String[6];
-		String[] price = new String[6];
-
-		for (int i = 0; i < 6; i++) {
+		int size=shtitles.size();
+		String[] name = new String[size];
+		String[] price = new String[size];
+		for (int i = 0; i <size; i++) {
 			name[i] = shtitles.get(i).getText();
 			price[i] = shprices.get(i).getText();
-			// System.out.print(shtitles.get(i).getText() + " ");
-			// System.out.println(shprices.get(i).getText());
-			FileIO.output1(name, price);
-		}
+			//System.out.print(shtitles.get(i).getText() + "  ");
+			//System.out.println(shprices.get(i).getText());
+		FileIO.output1(name,price,size);	
+	}
+	
 
 	}
-
 	public void close() {
 		driver.quit();
 	}
