@@ -13,18 +13,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class FileIO {
 	// variables declaration
-		FileInputStream fis = null;
-		static FileOutputStream fos = null;
-		static XSSFWorkbook workbook = null;
-		static XSSFSheet sheet = null;
-		static XSSFRow row = null;
-		Properties prop = null;
+	static FileInputStream fis = null;
+	static FileOutputStream fos = null;
+	Properties prop = null;
+	static XSSFWorkbook workbook = null;
+	static XSSFSheet sheet = null;
+	static XSSFRow row = null;
+	
 
 		// Setting properties file for input
 		public Properties inputSetup() {
 
 			File file = new File("C:\\Users\\Ks4u\\git\\Code_Automation1\\Automation\\Resources\\Config.properties");
-
 			try {
 				fis = new FileInputStream(file);
 				prop = new Properties();
@@ -44,14 +44,14 @@ public class FileIO {
 			return URL;
 		}
 
-		// to return the ChromeDriver location from properties file
+		//to return the ChromeDriver location from properties file
 		public String getChromeDriverLocation() {
 			inputSetup();
 			String location = prop.getProperty("chrome");
 			return location;
 		}
 
-		// to return the GeckoDriver location from properties file
+		//to return the GeckoDriver location from properties file
 		public String getGeckoDriverLocation() {
 			inputSetup();
 			String location = prop.getProperty("firefox");

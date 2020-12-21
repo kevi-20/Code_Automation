@@ -11,23 +11,26 @@ import Resources.BaseUI;
 import Resources.FileIO;
 
 
+
+
 public class UrbaanLader {
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
-	By search=By.id("search");
-	By enter=By.xpath("//*[@id='search_button']/span");
-	By price=By.xpath("//*[@id='filters-form']/div[1]/div/div/ul/li[2]/div[1]");
-	By stock=By.xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div/form/div[2]/div/input");
-    By storage=By.xpath("//*[@id='filters-form']/div[1]/div/div/ul/li[3]/div[1]");
-	By chairsearch=By.id("search");
-	By filter=By.id("filters_primary_category_Study_Chair");
-	By productTitle= By.xpath("//a[contains(text(),'Being At Home')]/parent::*/following-sibling::ul/li");
-    By chairTitle=By.className("product-title-sofa-mattresses");
-	By chairPrice=By.className("price-number");
-	By shelvesTitle=By.className("product-title-sofa-mattresses");
-    By shelvesPrice=By.className("price-number");
-   
+	static By Close;
+	static By search;
+	static By enter;
+	static By price;
+	static By stock;
+    static By storage;
+	static By chairsearch;
+	static By filter;
+	static By productTitle;
+    static By chairTitle;
+	static By chairPrice;
+	static By shelvesTitle;
+    static By shelvesPrice;
+
 
 	public UrbaanLader() {
 		fileio = new FileIO();
@@ -41,19 +44,19 @@ public class UrbaanLader {
 	  
  }
 	
-	public void createDriver(){
-		driver=BaseUI.getDriver();
+	public void createDriver(int option){
+		driver =  BaseUI.getDriver(option);
 		
 	}
 	public void popuping() {
-		// TODO Auto-generated method stub
-		driver.findElement(By.linkText("Close")).click();
+		Close=By.linkText(prop.getProperty("Close"));
+		driver.findElement(Close).click();
 	}
 
 	
 	public void search(){
-		
-		driver.findElement(search).sendKeys("bookshelf");
+		search=By.id(prop.getProperty("search"));
+		driver.findElement(search).sendKeys(prop.getProperty("bookshelf"));
 		try {
 
 			Thread.sleep(2000);
@@ -65,13 +68,13 @@ public class UrbaanLader {
 			e.printStackTrace();
 
 			}
-		driver.findElement(enter).click();
+		driver.findElement(By.xpath(prop.getProperty("enter"))).click();
 		//log.info("searching the bookshelf");
 		}
 	
 	public void selectPrice() {
-		driver.findElement(price).click();
-		WebElement upper=driver.findElement(By.xpath("//*[@id='filters-form']/div[1]/div/div/ul/li[2]/div[2]/div/div/ul/li[1]/div/div[2]/div[2]/div/div[2]/div"));
+		driver.findElement(By.xpath(prop.getProperty("price"))).click();
+		WebElement upper=driver.findElement(By.xpath(prop.getProperty("upper")));
        int uwidth=upper.getSize().width;            
        Actions s=new Actions(driver);
        s.dragAndDropBy(upper,(int) (-uwidth* (11.9)), 0);
@@ -92,8 +95,8 @@ public void print0(){
 				e.printStackTrace();
 
 				}
-		List<WebElement> shtitles = driver.findElements(shelvesTitle);
-		List<WebElement> shprices = driver.findElements(shelvesPrice);
+		List<WebElement> shtitles = driver.findElements(By.className(prop.getProperty("shelvesTitle")));
+		List<WebElement> shprices = driver.findElements(By.className(prop.getProperty("shelvesPrice")));
 		int size=shtitles.size();
 		String[] name = new String[size];
 		String[] price = new String[size];
@@ -119,8 +122,8 @@ public void print1(){
 			e.printStackTrace();
 
 			}
-	List<WebElement> shtitles = driver.findElements(shelvesTitle);
-	List<WebElement> shprices = driver.findElements(shelvesPrice);
+	 List<WebElement> shtitles = driver.findElements(By.className(prop.getProperty("shelvesTitle")));
+		List<WebElement> shprices = driver.findElements(By.className(prop.getProperty("shelvesPrice")));
 	int size=shtitles.size();
 	String[] name = new String[size];
 	String[] price = new String[size];
@@ -146,8 +149,8 @@ public void print2(){
 			e.printStackTrace();
 
 			}
-	List<WebElement> shtitles = driver.findElements(shelvesTitle);
-	List<WebElement> shprices = driver.findElements(shelvesPrice);
+	 List<WebElement> shtitles = driver.findElements(By.className(prop.getProperty("shelvesTitle")));
+		List<WebElement> shprices = driver.findElements(By.className(prop.getProperty("shelvesPrice")));
 	int size=shtitles.size();
 	String[] name = new String[size];
 	String[] price = new String[size];
@@ -165,10 +168,9 @@ public void print2(){
 
 
 	public void Storage() throws InterruptedException {
-		driver.findElement(storage).click();
+		driver.findElement(By.xpath(prop.getProperty("storage"))).click();
 		Thread.sleep(1000);
-		WebElement check = driver.findElement(By.xpath(
-		"/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div/form/div[1]/div/div/ul/li[3]/div[2]/div/div/div/ul/li[1]/input"));
+		WebElement check = driver.findElement(By.xpath(prop.getProperty("check")));
 		check.click();
 	}
 
@@ -176,7 +178,7 @@ public void print2(){
 
 	public void Stock() throws InterruptedException {
 		 Thread.sleep(1000);
-			driver.findElement(stock).click();
+			driver.findElement(By.xpath(prop.getProperty("stock"))).click();
 		
 	}
 

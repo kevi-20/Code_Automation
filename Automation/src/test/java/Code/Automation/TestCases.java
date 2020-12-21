@@ -1,5 +1,8 @@
 package Code.Automation;
 
+
+import java.util.Scanner;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -14,8 +17,13 @@ public class TestCases {
 
 	@BeforeSuite
 	public void setup() {
-
-		driver = BaseUI.getDriver();
+		Scanner sc = new Scanner(System.in);
+		UrbaanLader implementation = new UrbaanLader();
+		System.out.println("Enter 1 for Chrome \nEnter 2 for FireFox"); //for selecting the browser
+		int ch = sc.nextInt();  //input
+		sc.close();
+//		implementation.createDriver(ch);
+		driver = BaseUI.getDriver(ch);
 		
 	}
   @Test(priority = 0)
