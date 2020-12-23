@@ -57,7 +57,7 @@ public class TestCases extends UrbaanLader {
 	}
 
 	@Test(priority = 5)
-	public void print() throws IOException {
+	public void print() throws IOException, InterruptedException {
 
 		Print();
 
