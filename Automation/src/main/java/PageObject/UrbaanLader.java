@@ -27,6 +27,9 @@ public class UrbaanLader {
 	static By ShelvesPrice;
 	static By Collection;
 	static By Close;
+	static By Open;
+	static By Price1;
+	static By Search1;
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
@@ -57,7 +60,7 @@ public class UrbaanLader {
 	// Searching the BookShelf
 	public void Search() throws InterruptedException {
 		Search = By.id(prop.getProperty("Search"));
-		driver.findElement(Search).sendKeys("bookshelf");
+		driver.findElement(Search).sendKeys(prop.getProperty("Search1"));
 		Thread.sleep(1000);
 		Enter = By.xpath(prop.getProperty("enter"));
 		driver.findElement(Enter).click();
@@ -68,9 +71,8 @@ public class UrbaanLader {
 	public void SelectPrice() {
 		Price = By.xpath(prop.getProperty("price"));
 		driver.findElement(Price).click();	
-		
-		WebElement upper = driver.findElement(By.xpath(
-				"//*[@id='filters-form']/div[1]/div/div/ul/li[2]/div[2]/div/div/ul/li[1]/div/div[2]/div[2]/div/div[2]/div"));
+		Price1=By.xpath(prop.getProperty("price1"));
+		WebElement upper = driver.findElement(Price1);
 		int uwidth = upper.getSize().width;
 		Actions s = new Actions(driver);
 		s.dragAndDropBy(upper, (int) (-uwidth * (12.9)), 0);
@@ -83,8 +85,8 @@ public class UrbaanLader {
 		Storage = By.xpath(prop.getProperty("storage"));
 		driver.findElement(Storage).click();
 		Thread.sleep(1000);
-		WebElement check = driver.findElement(By.xpath(
-				"/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div/form/div[1]/div/div/ul/li[3]/div[2]/div/div/div/ul/li[1]/input"));
+		Open=By.name(prop.getProperty("open"));
+		WebElement check = driver.findElement(Open);
 		check.click();
 
 	}
