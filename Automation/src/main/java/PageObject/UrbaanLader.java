@@ -95,17 +95,18 @@ public class UrbaanLader {
 	public void Stock() throws InterruptedException {
 		
 	/** Including OutOfStock **/
+		
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("window.scrollBy(0,+700)");
 		
 	}
 
 	// Getting the results from the site and printing in Excel file and Console
-	public void Print() throws IOException {
+	public void Print() throws IOException, InterruptedException {
 
 		 ShelvesTitle= By.className(prop.getProperty("shelvesTitle"));
 		 ShelvesPrice= By.className(prop.getProperty("shelvesPrice"));
-		
+		Thread.sleep(1000);
 		// screen shot
 		TakesScreenshot tss = (TakesScreenshot) driver;
 		File srcfile = tss.getScreenshotAs(OutputType.FILE);
