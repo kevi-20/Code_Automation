@@ -63,6 +63,16 @@ public class TestCases extends UrbaanLader {
 
 	}
 
+	@Test(priority = 6)
+	public void chair() throws InterruptedException {
+		Chair();
+	}
+
+	@Test(priority = 7)
+	public void Studychairprint() throws IOException {
+		StudyChairDetails();
+	}
+
 	@AfterClass
 	public void closeBrowser() {
 
