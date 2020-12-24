@@ -6,15 +6,21 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import Resources.BaseUI;
 import Resources.FileIO;
+
+/************* @author 873477 MEGHA *****************/
 
 public class UrbaanLader {
 	static By Search;
@@ -30,9 +36,17 @@ public class UrbaanLader {
 	static By Open;
 	static By Price1;
 	static By Search1;
+	static By ChairSearch;
+	static By Filter;
+	static By ChairSearch1;
+	static By Category;
+	static By TableName;
+	static By TablePrice;
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
+
+	public static Logger log = LogManager.getLogger(UrbaanLader.class);
 
 	public UrbaanLader() {
 		fileio = new FileIO();
@@ -40,19 +54,18 @@ public class UrbaanLader {
 	}
 
 	public WebDriver createDriver(int option) {
-
 		return driver = BaseUI.getDriver(option);
 	}
 
 	public UrbaanLader(WebDriver driver) {
-
 		this.driver = driver;
 	}
 
+	/************ @author TEJA ***************/
 	// Closing the Pop
 	public void Popuping() {
-		
-		Close=By.linkText(prop.getProperty("Close"));
+		log.info("Closing the pop-up");
+		Close = By.linkText(prop.getProperty("Close"));
 		driver.findElement(Close).click();
 
 	}
@@ -64,54 +77,54 @@ public class UrbaanLader {
 		Thread.sleep(1000);
 		Enter = By.xpath(prop.getProperty("enter"));
 		driver.findElement(Enter).click();
-
+		log.info("searching the bookshelf");
 	}
 
 	// Selecting the price
 	public void SelectPrice() {
 		Price = By.xpath(prop.getProperty("price"));
-		driver.findElement(Price).click();	
-		Price1=By.xpath(prop.getProperty("price1"));
+		driver.findElement(Price).click();
+		Price1 = By.xpath(prop.getProperty("price1"));
 		WebElement upper = driver.findElement(Price1);
 		int uwidth = upper.getSize().width;
 		Actions s = new Actions(driver);
 		s.dragAndDropBy(upper, (int) (-uwidth * (12.9)), 0);
 		s.build().perform();
-
+		log.info("Selecting the price range");
 	}
 
+	/*********** @author 873477 MEGHA **************/
 	// Selecting the Storage Type as open
 	public void Storage() throws InterruptedException {
 		Storage = By.xpath(prop.getProperty("storage"));
 		driver.findElement(Storage).click();
 		Thread.sleep(1000);
-		Open=By.name(prop.getProperty("open"));
+		Open = By.name(prop.getProperty("open"));
 		WebElement check = driver.findElement(Open);
 		check.click();
-
+		log.info("Selecting the Storage Type");
 	}
 
+	/************* @author KAVITHA ****************/
 	// Including Out of Stock
 	public void Stock() throws InterruptedException {
-		
-	/** Including OutOfStock **/
-		
+		/** Including OutOfStock **/
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("window.scrollBy(0,+700)");
-		
+		log.info("Including Out Of Stock");
+
 	}
 
+	/**************** @author TEJA ******************/
 	// Getting the results from the site and printing in Excel file and Console
 	public void Print() throws IOException, InterruptedException {
-
-		 ShelvesTitle= By.className(prop.getProperty("shelvesTitle"));
-		 ShelvesPrice= By.className(prop.getProperty("shelvesPrice"));
+		ShelvesTitle = By.className(prop.getProperty("shelvesTitle"));
+		ShelvesPrice = By.className(prop.getProperty("shelvesPrice"));
 		Thread.sleep(1000);
 		// screen shot
 		TakesScreenshot tss = (TakesScreenshot) driver;
 		File srcfile = tss.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(srcfile, new File("ScreenShots\\BookShelf.png"));
-		
 		List<WebElement> shtitles = driver.findElements(ShelvesTitle);
 		List<WebElement> shprices = driver.findElements(ShelvesPrice);
 		System.out.println("BookShelves Below 15000 :");
@@ -124,10 +137,46 @@ public class UrbaanLader {
 			System.out.print(shtitles.get(i).getText() + "  ");
 			System.out.println(shprices.get(i).getText());
 			FileIO.output1(name, price, size);
+			log.info("Printing The BookShelf Details");
 		}
 
 	}
 
+	/**************** @author KRISHNA *******************/
+	// Searching chair
+	public void Chair() throws InterruptedException {
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("window.scrollBy(0,-500)");
+		Thread.sleep(1000);
+		ChairSearch = By.id(prop.getProperty("chairsearch"));
+		driver.findElement(ChairSearch).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+		Thread.sleep(1000);
+		driver.findElement(ChairSearch).sendKeys(prop.getProperty("chairsearch1") + Keys.ENTER);
+		log.info("Searching for study chair");
+
+	}
+
+	// Getting the results from the site and printing in Excel file and Console
+	public void StudyChairDetails() throws IOException {
+		TableName = By.xpath(prop.getProperty("TableName"));
+		TablePrice = By.xpath(prop.getProperty("TablePrice"));
+		List<WebElement> Names = driver.findElements(TableName);
+		List<WebElement> Price = driver.findElements(TablePrice);
+		System.out.println("  ");
+		System.out.println("The Study Chair Details are:");
+		String[] names = new String[4];
+		String[] price = new String[4];
+		for (int i = 0; i < 4; i++) {
+			names[i] = Names.get(i).getText();
+			price[i] = Price.get(i).getText();
+			System.out.print(Names.get(i).getText() + "  ");
+			System.out.println(Price.get(i).getText());
+			FileIO.chairDetails(names, price);
+			log.info("Printing The StudyChair Details");
+		}
+	}
+
+	// Closing the Browser
 	public void CloseBrowser() {
 		driver.quit();
 	}
