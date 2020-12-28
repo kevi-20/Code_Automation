@@ -62,7 +62,6 @@ public class TestCases extends UrbaanLader {
 		Print();
 
 	}
-
 	@Test(priority = 6)
 	public void chair() throws InterruptedException {
 		Chair();
@@ -71,6 +70,21 @@ public class TestCases extends UrbaanLader {
 	@Test(priority = 7)
 	public void Studychairprint() throws IOException {
 		StudyChairDetails();
+	}
+
+	@Test(priority = 8)
+	public void Sales() throws IOException {
+		CheckingOff();
+	}
+
+	@Test(priority = 9)
+	public void Cart() throws IOException {
+		CheckCart();
+	}
+
+	@Test(priority = 10)
+	public void Account() throws IOException {
+		CheckAccount();
 	}
 
 	@AfterClass
