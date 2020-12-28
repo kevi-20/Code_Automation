@@ -16,7 +16,7 @@ public class UrbaanLader {
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
-	static By Search;
+        static By Search;
 	static By ProductTitle;
 	static By Enter;
 	static By Price;
@@ -25,8 +25,16 @@ public class UrbaanLader {
 	static By ShelvesTitle;
 	static By ShelvesPrice;
 	static By Collection;
-	By shelvesTitle = By.className("product-title-sofa-mattresses");
-	By shelvesPrice = By.className("price-number");
+	static By Close;
+	static By Open;
+	static By Price1;
+	static By Search1;
+	static By ChairSearch;
+	static By Filter;
+	static By ChairSearch1;
+	static By Category;
+	static By TableName;
+	static By TablePrice;
 
 	public UrbaanLader(WebDriver driver) {
 		this.driver = driver;
@@ -81,6 +89,33 @@ public class UrbaanLader {
 
 	}
 
+	public void print0(){
+		 try {
+
+				Thread.sleep(1000);
+
+				} catch (Exception e) {
+
+		
+
+				e.printStackTrace();
+
+				}
+		List<WebElement> shtitles = driver.findElements(By.className(prop.getProperty("shelvesTitle")));
+		List<WebElement> shprices = driver.findElements(By.className(prop.getProperty("shelvesPrice")));
+		int size=shtitles.size();
+		String[] name = new String[size];
+		String[] price = new String[size];
+		for (int i = 0; i <size; i++) {
+			name[i] = shtitles.get(i).getText();
+			price[i] = shprices.get(i).getText();
+			//System.out.print(shtitles.get(i).getText() + "  ");
+			//System.out.println(shprices.get(i).getText());
+		FileIO.output0(name,price,size);	
+  }
+		
+ 
+}
 	public void stock() {
 		try {
 
@@ -98,6 +133,8 @@ public class UrbaanLader {
 	}
 
 	public void print(){
+		ShelvesTitle = By.className(prop.getProperty("shelvesTitle"));
+		ShelvesPrice = By.className(prop.getProperty("shelvesPrice"));
 		 try {
 
 				Thread.sleep(1000);
@@ -109,8 +146,8 @@ public class UrbaanLader {
 				e.printStackTrace();
 
 				}
-		List<WebElement> shtitles = driver.findElements(shelvesTitle);
-		List<WebElement> shprices = driver.findElements(shelvesPrice);
+		List<WebElement> shtitles = driver.findElements(ShelvesTitle);
+		List<WebElement> shprices = driver.findElements(ShelvesPrice);
 		int size=shtitles.size();
 		String[] name = new String[size];
 		String[] price = new String[size];
@@ -124,6 +161,39 @@ public class UrbaanLader {
 	
 
 	}
+	public void Chair() throws InterruptedException {
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("window.scrollBy(0,-500)");
+		Thread.sleep(1000);
+		ChairSearch = By.id(prop.getProperty("chairsearch"));
+		driver.findElement(ChairSearch).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+		Thread.sleep(1000);
+		driver.findElement(ChairSearch).sendKeys(("Study Chair") + Keys.ENTER);
+		//log.info("Searching for study chair");
+
+	}
+
+	// Getting the results from the site and printing in Excel file and Console
+	public void StudyChairDetails() throws IOException {
+		TableName = By.xpath(prop.getProperty("TableName"));
+		TablePrice = By.xpath(prop.getProperty("TablePrice"));
+		List<WebElement> Names = driver.findElements(TableName);
+		List<WebElement> Price = driver.findElements(TablePrice);
+		//System.out.println("  ");
+		//System.out.println("The Study Chair Details are:");
+		String[] names = new String[4];
+		String[] price = new String[4];
+		for (int i = 0; i < 4; i++) {
+			names[i] = Names.get(i).getText();
+			price[i] = Price.get(i).getText();
+			//System.out.print(Names.get(i).getText() + "  ");
+			//System.out.println(Price.get(i).getText());
+			FileIO.chairDetails(names, price);
+			//log.info("Printing The StudyChair Details");
+		}
+	}
+
+	// Closing the Browser
 	public void close() {
 		driver.quit();
 	}
