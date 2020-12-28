@@ -16,6 +16,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 import Resources.BaseUI;
 import Resources.FileIO;
@@ -42,6 +43,16 @@ public class UrbaanLader {
 	static By Category;
 	static By TableName;
 	static By TablePrice;
+	static By Sale;
+	static By ProductOff;
+	static By Cart;
+	static By CartTitle;
+	static By CheckAcc;
+	static By CheckUser;
+	static By CheckPssd;
+	static By CheckSubmit;
+	static By UserName;
+	static By Password;
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
@@ -61,13 +72,12 @@ public class UrbaanLader {
 		this.driver = driver;
 	}
 
-	/************ @author TEJA ***************/
+	/************* @author 873221 TEJA **************/
 	// Closing the Pop
 	public void Popuping() {
-		log.info("Closing the pop-up");
 		Close = By.linkText(prop.getProperty("Close"));
 		driver.findElement(Close).click();
-
+		log.info("Closing the pop-up");
 	}
 
 	// Searching the BookShelf
@@ -98,14 +108,14 @@ public class UrbaanLader {
 	public void Storage() throws InterruptedException {
 		Storage = By.xpath(prop.getProperty("storage"));
 		driver.findElement(Storage).click();
-		Thread.sleep(1000);
-		Open = By.name(prop.getProperty("open"));
+		Thread.sleep(100);
+		Open = By.xpath(prop.getProperty("open"));
 		WebElement check = driver.findElement(Open);
 		check.click();
 		log.info("Selecting the Storage Type");
 	}
 
-	/************* @author KAVITHA ****************/
+	/************* @author 873201 KAVITHA ****************/
 	// Including Out of Stock
 	public void Stock() throws InterruptedException {
 		/** Including OutOfStock **/
@@ -115,12 +125,12 @@ public class UrbaanLader {
 
 	}
 
-	/**************** @author TEJA ******************/
+	/**************** @author 873221 TEJA ******************/
 	// Getting the results from the site and printing in Excel file and Console
 	public void Print() throws IOException, InterruptedException {
 		ShelvesTitle = By.className(prop.getProperty("shelvesTitle"));
 		ShelvesPrice = By.className(prop.getProperty("shelvesPrice"));
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		// screen shot
 		TakesScreenshot tss = (TakesScreenshot) driver;
 		File srcfile = tss.getScreenshotAs(OutputType.FILE);
@@ -142,12 +152,12 @@ public class UrbaanLader {
 
 	}
 
-	/**************** @author KRISHNA *******************/
+	/**************** @author 873115 KRISHNA *******************/
 	// Searching chair
 	public void Chair() throws InterruptedException {
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("window.scrollBy(0,-500)");
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		ChairSearch = By.id(prop.getProperty("chairsearch"));
 		driver.findElement(ChairSearch).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 		Thread.sleep(1000);
@@ -174,6 +184,80 @@ public class UrbaanLader {
 			FileIO.chairDetails(names, price);
 			log.info("Printing The StudyChair Details");
 		}
+	}
+	
+	/**************** @author 873466 KEVIN *******************/
+	//Checking the title of Sale with Product 30% OFF 
+	public void CheckingOff() throws IOException {
+		Sale=By.xpath(prop.getProperty("sale"));
+		driver.findElement(Sale).click();
+		ProductOff=By.xpath(prop.getProperty("productOff"));
+		driver.findElement(ProductOff).click();
+		String ActualTitle = driver.getTitle();
+		String ExpectedTitle =driver.getTitle();
+		Assert.assertEquals(ExpectedTitle, ActualTitle);
+		System.out.println(" ");
+		System.out.println(ActualTitle);
+		//Screen Shot
+		TakesScreenshot tss = (TakesScreenshot) driver;
+		File srcfile = tss.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(srcfile, new File("ScreenShots\\Screen.png"));
+		System.out.println("the Screenshot is taken");
+		log.info("Checking Sale For Product 30% OFF");
+		
+	}
+
+	//Checking the Cart 
+	public void CheckCart() throws IOException {
+		Cart=By.xpath(prop.getProperty("cart"));
+		driver.findElement(Cart).click();
+		CartTitle=By.xpath(prop.getProperty("cartTitle"));
+		String ch = driver.findElement(CartTitle).getText();
+		System.out.println(" ");
+		System.out.println(ch);
+		//Screen Shot
+		TakesScreenshot tss = (TakesScreenshot) driver;
+		File srcfile = tss.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(srcfile, new File("ScreenShots\\Screen1.png"));
+		System.out.println("the Screenshot is taken");
+		log.info("Checking the cart Title");
+	}
+
+	//Checking the Invalid Login 
+	public void CheckAccount() throws IOException{
+		CheckAcc=By.xpath(prop.getProperty("checkAcc"));
+		driver.findElement(CheckAcc).click();
+		//Entering invalid UserName
+		CheckUser=By.xpath(prop.getProperty("checkUser"));
+		WebElement ele = driver.findElement(CheckUser);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", ele);
+		ele.sendKeys(prop.getProperty("username"));
+		//Entering invalid Password
+		CheckPssd=By.xpath(prop.getProperty("checkPssd"));
+		WebElement ele1 = driver.findElement(CheckPssd);
+		JavascriptExecutor executor1 = (JavascriptExecutor)driver;
+		executor1.executeScript("arguments[0].click();", ele1);
+		ele1.sendKeys(prop.getProperty("password"));
+		//Clicking the Login Button
+		CheckSubmit=By.xpath(prop.getProperty("checkSubmit"));
+		WebElement submit = driver.findElement(CheckSubmit);
+		JavascriptExecutor executorsub = (JavascriptExecutor)driver;
+		executorsub.executeScript("arguments[0].click();",  submit);
+
+		/*CheckUser=By.xpath(prop.getProperty("checkUser"));
+		driver.findElement(CheckUser).sendKeys(prop.getProperty("username"));
+		CheckPssd=By.xpath(prop.getProperty("checkPssd"));
+		driver.findElement(CheckPssd).sendKeys(prop.getProperty("password"));
+		CheckSubmit=By.xpath(prop.getProperty("checkSubmit"));
+		driver.findElement(CheckSubmit).click();	*/
+		
+		//Screen Shot
+		TakesScreenshot tss = (TakesScreenshot) driver;
+		File srcfile = tss.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(srcfile, new File("ScreenShots\\Negative.png"));
+		System.out.println("the Screenshot is taken");
+		log.info("Checking Invalid Login");
 	}
 
 	// Closing the Browser
