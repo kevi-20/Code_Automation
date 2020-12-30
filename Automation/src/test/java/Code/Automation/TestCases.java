@@ -9,17 +9,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import PageObject.UrbaanLader;
+import Resources.BaseUI;
 
 public class TestCases extends UrbaanLader {
 	@BeforeClass
-	public void initailize() {
-		Scanner sc = new Scanner(System.in);
-		// for selecting the browser
-		System.out.println(" Enter 1 for Chrome \n Enter 2 for Firefox ");
-		System.out.println(" ENTER YOUR CHOICE");
-		int ch = sc.nextInt(); // input
-		sc.close();
-		driver = createDriver(ch);
+	public void initailize() throws IOException {
+		driver = BaseUI.getDriver();
 
 	}
 

@@ -64,8 +64,8 @@ public class UrbaanLader {
 		prop = fileio.inputSetup();
 	}
 
-	public WebDriver createDriver(int option) {
-		return driver = BaseUI.getDriver(option);
+	public WebDriver createDriver() throws IOException {
+		return driver = BaseUI.getDriver();
 	}
 
 	public UrbaanLader(WebDriver driver) {
