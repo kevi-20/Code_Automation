@@ -14,17 +14,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class FileIO {
 	// variables declaration
 		FileInputStream fis = null;
-		FileOutputStream fos = null;
-		XSSFWorkbook workbook = null;
-		XSSFSheet sheet = null;
-		XSSFRow row = null;
+		static FileOutputStream fos = null;
+		static XSSFWorkbook workbook = null;
+		static XSSFSheet sheet = null;
+		static XSSFRow row = null;
 		Properties prop = null;
 
 		// Setting properties file for input
 		public Properties inputSetup() {
 
-			File file = new File("resource\\config.properties");
-
+			File file = new File(System.getProperty("user.dir") + "\\Automation\\Resources\\Config.properties");
+			System.out.println(file.getAbsolutePath());
 			try {
 				fis = new FileInputStream(file);
 				prop = new Properties();
@@ -58,9 +58,30 @@ public class FileIO {
 			return location;
 		}
 		/**********************************Printing the output in excel**********************************/
+		public static  void output0(String[]name ,String[]price,int size) {
+			workbook = new XSSFWorkbook();
+			sheet = workbook.createSheet("output0.xlsx");
+			for (int i = 0; i < size; i++) {
+				row = sheet.createRow(i);
+				row.createCell(0).setCellValue(name[i]);
+				row.createCell(1).setCellValue(price[i]);
+			}
+		
+			sheet.autoSizeColumn(0);
+			//Writing the output to Excel file using FileOutputStream
+			try {
+				fos = new FileOutputStream("output0.xlsx");
+				workbook.write(fos);
+				fos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		public static  void output1(String[]name ,String[]price,int size) {
 			workbook = new XSSFWorkbook();
-			sheet = workbook.createSheet("output1.xlsx");
+			sheet = workbook.createSheet("output0.xlsx");
 			for (int i = 0; i < size; i++) {
 				row = sheet.createRow(i);
 				row.createCell(0).setCellValue(name[i]);
@@ -78,5 +99,24 @@ public class FileIO {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		public static void chairDetails(String[] Name, String[] Price) {
+			workbook = new XSSFWorkbook();
+			sheet = workbook.createSheet("output2");
+			for (int i = 0; i < 4; i++) {
+				row = sheet.createRow(i);
+				row.createCell(0).setCellValue(Name[i]);
+				row.createCell(1).setCellValue(Price[i]);
+			}
+			try {
+				fos = new FileOutputStream("output2.xlsx");
+				workbook.write(fos);
+				fos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 }
