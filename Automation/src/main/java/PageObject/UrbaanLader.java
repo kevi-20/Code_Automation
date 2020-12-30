@@ -49,8 +49,6 @@ public class UrbaanLader {
 	static By CartTitle;
 	static By CheckAcc;
 	static By CheckUser;
-	static By CheckPssd;
-	static By CheckSubmit;
 	static By UserName;
 	static By Password;
 	public WebDriver driver;
@@ -64,8 +62,8 @@ public class UrbaanLader {
 		prop = fileio.inputSetup();
 	}
 
-	public WebDriver createDriver() throws IOException {
-		return driver = BaseUI.getDriver();
+	public WebDriver createDriver(int option) throws IOException {
+		 return driver = BaseUI.getDriver(option);
 	}
 
 	public UrbaanLader(WebDriver driver) {
@@ -108,7 +106,7 @@ public class UrbaanLader {
 	public void Storage() throws InterruptedException {
 		Storage = By.xpath(prop.getProperty("storage"));
 		driver.findElement(Storage).click();
-		Thread.sleep(100);
+		Thread.sleep(1000);
 		Open = By.xpath(prop.getProperty("open"));
 		WebElement check = driver.findElement(Open);
 		check.click();
@@ -130,7 +128,7 @@ public class UrbaanLader {
 	public void Print() throws IOException, InterruptedException {
 		ShelvesTitle = By.className(prop.getProperty("shelvesTitle"));
 		ShelvesPrice = By.className(prop.getProperty("shelvesPrice"));
-		Thread.sleep(100);
+		Thread.sleep(1000);
 		// screen shot
 		TakesScreenshot tss = (TakesScreenshot) driver;
 		File srcfile = tss.getScreenshotAs(OutputType.FILE);
@@ -229,29 +227,7 @@ public class UrbaanLader {
 		driver.findElement(CheckAcc).click();
 		//Entering invalid UserName
 		CheckUser=By.xpath(prop.getProperty("checkUser"));
-		WebElement ele = driver.findElement(CheckUser);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", ele);
-		ele.sendKeys(prop.getProperty("username"));
-		//Entering invalid Password
-		CheckPssd=By.xpath(prop.getProperty("checkPssd"));
-		WebElement ele1 = driver.findElement(CheckPssd);
-		JavascriptExecutor executor1 = (JavascriptExecutor)driver;
-		executor1.executeScript("arguments[0].click();", ele1);
-		ele1.sendKeys(prop.getProperty("password"));
-		//Clicking the Login Button
-		CheckSubmit=By.xpath(prop.getProperty("checkSubmit"));
-		WebElement submit = driver.findElement(CheckSubmit);
-		JavascriptExecutor executorsub = (JavascriptExecutor)driver;
-		executorsub.executeScript("arguments[0].click();",  submit);
-
-		/*CheckUser=By.xpath(prop.getProperty("checkUser"));
-		driver.findElement(CheckUser).sendKeys(prop.getProperty("username"));
-		CheckPssd=By.xpath(prop.getProperty("checkPssd"));
-		driver.findElement(CheckPssd).sendKeys(prop.getProperty("password"));
-		CheckSubmit=By.xpath(prop.getProperty("checkSubmit"));
-		driver.findElement(CheckSubmit).click();	*/
-		
+		driver.findElement(CheckUser).sendKeys(prop.getProperty("username")+Keys.TAB+prop.getProperty("password")+Keys.TAB+Keys.TAB+Keys.ENTER);
 		//Screen Shot
 		TakesScreenshot tss = (TakesScreenshot) driver;
 		File srcfile = tss.getScreenshotAs(OutputType.FILE);
