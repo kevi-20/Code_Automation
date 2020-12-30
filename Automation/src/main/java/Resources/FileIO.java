@@ -38,6 +38,7 @@ public class FileIO {
 		return prop;
 	}
 
+	/******************* Printing the output in excel **********************/
 	public static void output1(String[] name, String[] price, int size) {
 		workbook = new XSSFWorkbook();
 		sheet = workbook.createSheet("output1");
