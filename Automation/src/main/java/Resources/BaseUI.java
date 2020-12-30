@@ -32,7 +32,7 @@ public class BaseUI {
 			prop.load(fis);
 			URL = fileio.getURL();
 			String browserName=prop.getProperty("browser");
-			if(browserName.equals("chrome"))
+			if(browserName.equalsIgnoreCase("chrome"))
 			{
 			   location = fileio.getChromeDriverLocation();
 				System.setProperty("webdriver.chrome.driver", location);
@@ -40,7 +40,7 @@ public class BaseUI {
 				chromeOptions.addArguments("--disable-notifications");
 	            driver = new ChromeDriver(chromeOptions);
 			}
-			else if (browserName.equals("firefox"))
+			else if (browserName.equalsIgnoreCase("firefox"))
 			{
 				location = fileio.getGeckoDriverLocation();
 				System.setProperty("webdriver.gecko.driver", location);

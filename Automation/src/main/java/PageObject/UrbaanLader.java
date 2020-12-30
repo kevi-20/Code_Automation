@@ -64,9 +64,7 @@ public class UrbaanLader {
 			e.printStackTrace();
 
 			}
-		driver.findElement(By.xpath("//input[@class='email required input_authentication']")).sendKeys("tej");
-		driver.findElement(By.xpath("//input[@class='required input_authentication']")).sendKeys("tej@123");
-		driver.findElement(By.id("ul_site_login")).click();
+	
 		driver.findElement(Close).click();
 	}
 
