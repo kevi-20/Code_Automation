@@ -1,10 +1,13 @@
 package PageObject;
 
+import java.io.IOException;
 import java.util.List;
 
 import java.util.Properties;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +19,7 @@ public class UrbaanLader {
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
-        static By Search;
+	static By Search;
 	static By ProductTitle;
 	static By Enter;
 	static By Price;
