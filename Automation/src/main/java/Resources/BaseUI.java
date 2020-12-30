@@ -1,6 +1,10 @@
 package Resources;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -15,17 +19,29 @@ public class BaseUI {
 		static String URL;
 		static String location;
 		static WebDriver driver;
-		public static WebDriver getDriver(int ch) {
+		public static Properties prop;
+		
+		public static WebDriver getDriver() throws IOException {
 
 			FileIO fileio = new FileIO();
+			prop= new Properties();
+			FileInputStream fis=new FileInputStream("C:\\Users\\Ks4u\\git\\Code_Automation1\\Automation\\Resources\\Config.properties");
+
+			 
+
+			prop.load(fis);
 			URL = fileio.getURL();
-			if (ch==1) {
-				location = fileio.getChromeDriverLocation();
+			String browserName=prop.getProperty("browser");
+			if(browserName.equals("chrome"))
+			{
+			   location = fileio.getChromeDriverLocation();
 				System.setProperty("webdriver.chrome.driver", location);
 				ChromeOptions chromeOptions = new ChromeOptions();
 				chromeOptions.addArguments("--disable-notifications");
 	            driver = new ChromeDriver(chromeOptions);
-			} else if (ch==2) {
+			}
+			else if (browserName.equals("firefox"))
+			{
 				location = fileio.getGeckoDriverLocation();
 				System.setProperty("webdriver.gecko.driver", location);
 

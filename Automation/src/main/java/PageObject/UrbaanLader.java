@@ -1,12 +1,15 @@
 package PageObject;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import Resources.BaseUI;
 import Resources.FileIO;
 
@@ -44,12 +47,26 @@ public class UrbaanLader {
 	  
  }
 	
-	public void createDriver(int option){
-		driver =  BaseUI.getDriver(option);
+	public void createDriver() throws IOException{
+		driver =  BaseUI.getDriver();
 		
 	}
 	public void popuping() {
 		Close=By.linkText(prop.getProperty("Close"));
+		try {
+
+			Thread.sleep(2000);
+
+			} catch (Exception e) {
+
+	
+
+			e.printStackTrace();
+
+			}
+		driver.findElement(By.xpath("//input[@class='email required input_authentication']")).sendKeys("tej");
+		driver.findElement(By.xpath("//input[@class='required input_authentication']")).sendKeys("tej@123");
+		driver.findElement(By.id("ul_site_login")).click();
 		driver.findElement(Close).click();
 	}
 

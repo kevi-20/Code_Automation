@@ -1,6 +1,7 @@
 package Code.Automation;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.openqa.selenium.WebDriver;
@@ -16,14 +17,10 @@ public class TestCases {
   public static WebDriver driver;
 
 	@BeforeSuite
-	public void setup() {
+	public void setup() throws IOException {
 		Scanner sc = new Scanner(System.in);
 		UrbaanLader implementation = new UrbaanLader();
-		System.out.println("Enter 1 for Chrome \nEnter 2 for FireFox"); //for selecting the browser
-		int ch = sc.nextInt();  //input
-		sc.close();
-//		implementation.createDriver(ch);
-		driver = BaseUI.getDriver(ch);
+		driver = BaseUI.getDriver();
 		
 	}
   @Test(priority = 0)
