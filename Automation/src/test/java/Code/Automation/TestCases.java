@@ -78,7 +78,7 @@ public class TestCases extends UrbaanLader {
 		logger.info("This test will Stores the name and price of bookshelf and prints in excel");
 		Print();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\BookShelf.png"));
 	}
 
 	@Test(priority = 6)
@@ -103,7 +103,7 @@ public class TestCases extends UrbaanLader {
 		logger.log(Status.INFO, "Checking the Invalid Login");
 		CheckAccount();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\Negative.png"));
 	}
 
 	@Test(priority = 9)
@@ -112,7 +112,7 @@ public class TestCases extends UrbaanLader {
 		logger.log(Status.INFO, "Printing the title of Sale with product 30% OFF");
 		CheckingOff();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\Screen.png"));
 	}
 
 	@Test(priority = 10)
@@ -121,7 +121,7 @@ public class TestCases extends UrbaanLader {
 		logger.log(Status.INFO, "Printing the title of Chart");
 		CheckCart();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\Screen1.png"));
 	}
 
 	@Test(priority = 11)
