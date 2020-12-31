@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.Markup;
 
 import Resources.ExtentReportManager;
 import PageObject.UrbaanLader;
@@ -22,6 +23,7 @@ public class TestCases extends UrbaanLader {
 		ExtentTest logger = report.createTest("Invoke Browser");
 		logger.log(Status.INFO, "Initailising the browser");
 		driver = createDriver();
+		logger.pass("Passed");
 	}
 
 	@Test(priority = 0)
@@ -76,6 +78,7 @@ public class TestCases extends UrbaanLader {
 		logger.info("This test will Stores the name and price of bookshelf and prints in excel");
 		Print();
 		logger.pass("Passed");
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
 	}
 
 	@Test(priority = 6)
@@ -83,6 +86,7 @@ public class TestCases extends UrbaanLader {
 		ExtentTest logger = report.createTest("Searching for studychair");
 		logger.log(Status.INFO, "Searching for studychair");
 		Chair();
+		logger.pass("Passed");
 	}
 
 	@Test(priority = 7)
@@ -95,26 +99,29 @@ public class TestCases extends UrbaanLader {
 
 	@Test(priority = 8)
 	public void Account() throws IOException {
-		ExtentTest logger = report.createTest("Checking the Invalid Login");
+		ExtentTest logger = report.createTest("Checking the Login with Invalid input");
 		logger.log(Status.INFO, "Checking the Invalid Login");
 		CheckAccount();
 		logger.pass("Passed");
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
 	}
 
 	@Test(priority = 9)
 	public void Sales() throws IOException {
-		ExtentTest logger = report.createTest("Selecting the sales with product 30% OFF");
+		ExtentTest logger = report.createTest("Printing the title of Sale with product 30% OFF");
 		logger.log(Status.INFO, "Printing the title of Sale with product 30% OFF");
 		CheckingOff();
 		logger.pass("Passed");
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
 	}
 
 	@Test(priority = 10)
 	public void Cart() throws IOException {
-		ExtentTest logger = report.createTest("Selecting the Chart with 0 products ");
+		ExtentTest logger = report.createTest("Printing the title of Chart  ");
 		logger.log(Status.INFO, "Printing the title of Chart");
 		CheckCart();
 		logger.pass("Passed");
+		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath("user path"));
 	}
 
 	@Test(priority = 11)
