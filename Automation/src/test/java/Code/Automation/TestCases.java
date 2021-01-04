@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.Markup;
 
 import Resources.ExtentReportManager;
 import PageObject.UrbaanLader;
@@ -78,7 +78,8 @@ public class TestCases extends UrbaanLader {
 		logger.info("This test will Stores the name and price of bookshelf and prints in excel");
 		Print();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\BookShelf.png"));
+		logger.info("Details of " + "Test screenshot", MediaEntityBuilder
+				.createScreenCaptureFromPath(System.getProperty("user.dir") + "\\ScreenShots\\BookShelf.png").build());
 	}
 
 	@Test(priority = 6)
@@ -103,7 +104,8 @@ public class TestCases extends UrbaanLader {
 		logger.log(Status.INFO, "Checking the Invalid Login");
 		CheckAccount();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\Negative.png"));
+		logger.info("Details of " + "Test screenshot", MediaEntityBuilder
+				.createScreenCaptureFromPath(System.getProperty("user.dir") + "\\ScreenShots\\Negative.png").build());
 	}
 
 	@Test(priority = 9)
@@ -112,7 +114,8 @@ public class TestCases extends UrbaanLader {
 		logger.log(Status.INFO, "Printing the title of Sale with product 30% OFF");
 		CheckingOff();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\Screen.png"));
+		logger.info("Details of " + "Test screenshot", MediaEntityBuilder
+				.createScreenCaptureFromPath(System.getProperty("user.dir") + "\\ScreenShots\\Screen.png").build());
 	}
 
 	@Test(priority = 10)
@@ -121,7 +124,8 @@ public class TestCases extends UrbaanLader {
 		logger.log(Status.INFO, "Printing the title of Chart");
 		CheckCart();
 		logger.pass("Passed");
-		logger.log(Status.PASS,(Markup)logger.addScreenCaptureFromPath(System.getProperty("user.dir")+"\\ScreenShots\\Screen1.png"));
+		logger.info("Details of " + "Test screenshot", MediaEntityBuilder
+				.createScreenCaptureFromPath(System.getProperty("user.dir") + "\\ScreenShots\\Screen1.png").build());
 	}
 
 	@Test(priority = 11)
