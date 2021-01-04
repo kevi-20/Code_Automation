@@ -22,10 +22,12 @@ public static ExtentReports report;
 			
 			htmlReporter.config().setDocumentTitle("UI Automation Results");
 			htmlReporter.config().setReportName("UI Test Report");
+			htmlReporter.config().setCSS(".r-img{width:50%;}");
 			htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
 			htmlReporter.config().setTimeStampFormat("MMM dd, yyyy HH:mm:ss");
 		}
 		
 		return report;
 	}
+	
 }
