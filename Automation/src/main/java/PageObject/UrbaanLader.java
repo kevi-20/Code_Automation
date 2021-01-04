@@ -225,7 +225,7 @@ public class UrbaanLader {
 	public void CheckAccount() throws IOException{
 		CheckAcc=By.xpath(prop.getProperty("checkAcc"));
 		driver.findElement(CheckAcc).click();
-		//Entering invalid UserName
+		//Entering invalid values
 		CheckUser=By.xpath(prop.getProperty("checkUser"));
 		driver.findElement(CheckUser).sendKeys(prop.getProperty("username")+Keys.TAB+prop.getProperty("password")+Keys.TAB+Keys.TAB+Keys.ENTER);
 		//Screen Shot
