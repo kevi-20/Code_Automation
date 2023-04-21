@@ -34,8 +34,9 @@ learn_more_link = codeless_automation_link.driver.findElement(By.xpath("//a[cont
 learn_more_link.click()
 
 # Verify the title of the page
-expected_title = "TestingWhiz Integration | LambdaTest"
-assert driver.title == expected_title, f"Title not matching. Expected: {expected_title}, Actual: {driver.title}"
+String ActualTitle = driver.getTitle();
+String ExpectedTitle = "TestingWhiz Integration | LambdaTest";
+Assert.assertEquals(ExpectedTitle, ActualTitle)
 
 # Close the current window
 driver.close()
