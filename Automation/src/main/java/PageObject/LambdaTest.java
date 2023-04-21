@@ -8,12 +8,12 @@ import Resources.BaseUI;
 import Resources.FileIO;
 
 
-public class UrbaanLader {
+public class LambdaTest {
 	public WebDriver driver;
 	static Properties prop;
 	static FileIO fileio;
 
-	public UrbaanLader() {
+	public LambdaTest() {
 		fileio = new FileIO();
 		prop = fileio.inputSetup();
 	}
@@ -23,7 +23,7 @@ public class UrbaanLader {
 		return driver = BaseUI.getDriver(option);
 	}
 
-	public UrbaanLader(WebDriver driver) {
+	public LambdaTest(WebDriver driver) {
 
 		this.driver = driver;
 	}
