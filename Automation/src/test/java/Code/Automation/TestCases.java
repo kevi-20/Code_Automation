@@ -3,7 +3,6 @@ package Code.Automation;
 public class TestCases {
 
 # Wait until all the elements in the DOM are available
-driver.findElement(By.xpath("//input[@id='usernamereg-firstName']"))
 wait = new WebDriverWait();
 wait.until(new EC.PresenceOfAllElementsLocated(By.CSS_SELECTOR, "body"))); 
   
